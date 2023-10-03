@@ -1,0 +1,25 @@
+import request from "supertest";
+import app from "../src/app";
+import { expect } from "chai";
+
+describe("GET /unavail-endpoint", () => {
+  it("should return 404", (done) => {
+    request(app).get("/unavail-endpoint").expect(404, done);
+  });
+});
+
+describe("GET /collection", () => {
+  it("Should return correctly", done => {
+
+    request(app)
+      .get("/collection")
+      .type("json")
+      .expect("Content-Type", "application/json")
+      .expect(200)
+      .end((err, res) => {
+        expect(res.type).to.eq("application/json");
+        expect(res.body.name).to.eq("monkey");
+        done();
+      });
+  });
+});
