@@ -9,16 +9,30 @@ describe("GET /unavail-endpoint", () => {
 });
 
 describe("GET /collection", () => {
-  it("Should return correctly", done => {
-
+  it("Should return errors for invalid contract address", done => {
     request(app)
-      .get("/collection")
+      .get("/collection/0")
       .type("json")
       .expect("Content-Type", "application/json")
-      .expect(200)
       .end((err, res) => {
+        expect(res.status).to.eq(400);
         expect(res.type).to.eq("application/json");
-        expect(res.body.name).to.eq("monkey");
+        expect(res.error).not.to.be.undefined;
+        expect(res.body.error.message).to.be.eq("should be a valid contract address");
+        done();
+      });
+  });
+
+
+  it("Should return correctly", done => {
+    request(app)
+      .get("/collection/0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d")
+      .type("json")
+      .expect("Content-Type", "application/json")
+      .end((err, res) => {
+        expect(res.status).to.eq(200);
+        expect(res.type).to.eq("application/json");
+        expect(res.error).to.be.false;
         done();
       });
   });
