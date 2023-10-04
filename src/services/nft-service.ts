@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import { OpenSeaSDK, Chain, OpenSeaCollection } from "opensea-js";
 import dotenv from "dotenv";
+import { OpenSeaNFT } from "./types";
 dotenv.config();
 
 // This example provider won't let you make transactions, only read-only calls:
@@ -25,6 +26,23 @@ export const getCollectionByContractAddress = async (
       openseaNftsByContractAddress.nfts[0].collection
     );
     return openseaCollection;
+  } catch (error) {
+    const message = JSON.parse(error.body);
+    throw { message };
+  }
+};
+
+export const getNftByTokenId = async (
+  contractAddress: string,
+  tokenId: string
+): Promise<OpenSeaNFT> => {
+  try {
+    const openseaNft = await openseaSDK.api.getNFT(
+      Chain.Mainnet,
+      contractAddress,
+      tokenId
+    );
+    return openseaNft.nft as OpenSeaNFT;
   } catch (error) {
     const message = JSON.parse(error.body);
     throw { message };
