@@ -169,7 +169,7 @@ export const getCollectionHoldersByContractAddress: RequestHandler = async (
         contractAddress
       );
 
-    res.json(collectionHolders);
+    res.json({ collectionHolders });
   } catch (error) {
     console.log(error.message);
     return next(new ApplicationError(error.message));

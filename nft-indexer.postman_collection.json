@@ -1,0 +1,353 @@
+{
+	"info": {
+		"_postman_id": "3d2d084f-2724-494f-85d7-58bd5116a2fa",
+		"name": "NFT Indexer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOSTNAME}}:{{PORT}}/login",
+					"host": [
+						"{{HOSTNAME}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get collection info",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOSTNAME}}:{{PORT}}/collection/:contractAddress",
+					"host": [
+						"{{HOSTNAME}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"collection",
+						":contractAddress"
+					],
+					"variable": [
+						{
+							"key": "contractAddress",
+							"value": "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get collection stats",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOSTNAME}}:{{PORT}}/collection/:contractAddress/stats",
+					"host": [
+						"{{HOSTNAME}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"collection",
+						":contractAddress",
+						"stats"
+					],
+					"variable": [
+						{
+							"key": "contractAddress",
+							"value": "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get collection holders info",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOSTNAME}}:{{PORT}}/collection/:contractAddress/holders",
+					"host": [
+						"{{HOSTNAME}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"collection",
+						":contractAddress",
+						"holders"
+					],
+					"variable": [
+						{
+							"key": "contractAddress",
+							"value": "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get nfts from contract address",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOSTNAME}}:{{PORT}}/collection/:contractAddress/nfts?next=\"\"",
+					"host": [
+						"{{HOSTNAME}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"collection",
+						":contractAddress",
+						"nfts"
+					],
+					"query": [
+						{
+							"key": "next",
+							"value": "\"\""
+						}
+					],
+					"variable": [
+						{
+							"key": "contractAddress",
+							"value": "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get nft from tokenid",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOSTNAME}}:{{PORT}}/collection/:contractAddress/nfts/:tokenId",
+					"host": [
+						"{{HOSTNAME}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"collection",
+						":contractAddress",
+						"nfts",
+						":tokenId"
+					],
+					"variable": [
+						{
+							"key": "contractAddress",
+							"value": "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"
+						},
+						{
+							"key": "tokenId",
+							"value": "5888"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get nft sales from tokenid",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOSTNAME}}:{{PORT}}/collection/:contractAddress/nfts/:tokenId/sales",
+					"host": [
+						"{{HOSTNAME}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"collection",
+						":contractAddress",
+						"nfts",
+						":tokenId"
+					],
+					"variable": [
+						{
+							"key": "contractAddress",
+							"value": "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"
+						},
+						{
+							"key": "tokenId",
+							"value": "5888"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get nft ownerships from tokenid",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOSTNAME}}:{{PORT}}/collection/:contractAddress/nfts/:tokenId/ownerships",
+					"host": [
+						"{{HOSTNAME}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"collection",
+						":contractAddress",
+						"nfts",
+						":tokenId",
+						"ownerships"
+					],
+					"variable": [
+						{
+							"key": "contractAddress",
+							"value": "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"
+						},
+						{
+							"key": "tokenId",
+							"value": "5888"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{AUTH_TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

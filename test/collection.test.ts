@@ -21,7 +21,7 @@ describe("POST /login", () => {
         expect(res.status).to.eq(200);
         expect(res.type).to.eq("application/json");
         expect(res.body).to.not.empty;
-        token = res.body;
+        token = res.body.token;
         done();
       });
   });

@@ -11,7 +11,7 @@ router.post("/login", (req, res) => {
   const token = jwt.sign({ username }, process.env.TOKEN_SECRET, {
     expiresIn: "100d",
   });
-  res.json(token);
+  res.json({ token });
 });
 
 // generic collection info endpoints
