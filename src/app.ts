@@ -8,7 +8,7 @@ import routes from "./routes";
 
 const result = dotenv.config();
 if (result.error) {
-    dotenv.config({ path: ".env.default" });
+  dotenv.config({ path: ".env.default" });
 }
 
 const app = express();
@@ -22,23 +22,25 @@ app.set("env", process.env.NODE_ENV || "development");
 
 app.use(routes);
 
-app.use((err: ApplicationError, req: Request, res: Response, next: NextFunction) => {
+app.use(
+  (err: ApplicationError, req: Request, res: Response, next: NextFunction) => {
     if (res.headersSent) {
-        return next(err);
+      return next(err);
     }
 
     if (process.env.NODE_ENV === "development") {
-        logger.log({
-            level: "error",
-            message: "Error in request handler",
-            error: err
-        });
+      logger.log({
+        level: "error",
+        message: "Error in request handler",
+        error: err,
+      });
     }
 
     return res.status(err.status || 500).json({
-        error: err,
-        message: err.message
+      error: err,
+      message: err.message,
     });
-});
+  }
+);
 
 export default app;
