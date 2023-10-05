@@ -62,3 +62,18 @@ export interface CollectionHolder {
   holdingBalance: number;
   holdingIds: number[];
 }
+
+export interface OpenseaAssetTransferEvent {
+  event_type: string;
+  chain: string;
+  transaction: string;
+  from_address: string;
+  to_address: string;
+  quantity: number;
+  timestamp: number;
+}
+
+export interface OpenseaAssetTransferEvents {
+  asset_events: OpenseaAssetTransferEvent[];
+  next: string;
+}

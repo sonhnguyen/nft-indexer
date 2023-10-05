@@ -55,3 +55,41 @@ export interface CollectionStats {
 
   statsByIntervals: StatsByInterval[];
 }
+
+export interface Nft {
+  identifier: string;
+  collection: string;
+  contract: string;
+  tokenStandard: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+  metadataUrl: string;
+}
+
+export interface NftsList {
+  nfts: Nft[];
+  next: string;
+}
+
+export interface NftSale {
+  marketplace: string;
+  contractAddress: string;
+  tokenId: string;
+  quantity: string;
+  buyerAddress: string;
+  sellerAddress: string;
+  taker: string;
+  sellerFee: Fee;
+  protocolFee: Fee;
+  royaltyFee: Fee;
+  blockNumber: number;
+  transactionHash: string;
+}
+
+export interface Fee {
+  amount: string;
+  tokenAddress?: string;
+  symbol: string;
+  decimals: number;
+}
