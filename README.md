@@ -17,11 +17,12 @@ This project uses TypeScript and comes with a collection of npm scripts to make 
 - `watch`: Serve and hot-reload as files changes.
 
 
-**Build and serve server**:
+**Build and serve or watch server**:
 ```
 npm install
 npm run build
 npm run serve
+npm run watch
 ```
 
 **Run test**
