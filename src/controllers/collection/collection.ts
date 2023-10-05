@@ -5,7 +5,7 @@ import * as NftService from "../../services/nft-service";
 import { check, validationResult } from "express-validator";
 import BadRequest from "../../errors/bad-request";
 import { isAddress } from "ethers/lib/utils";
-import { CollectionDetail, NftDetail } from "./types";
+import { CollectionDetail, CollectionStats, NftDetail } from "./types";
 
 export const getCollectionByContractAddress: RequestHandler = async (
   req,
@@ -47,7 +47,6 @@ export const getCollectionByContractAddress: RequestHandler = async (
         openseaCollection.devSellerFeeBasisPoints,
       imageUrl: openseaCollection.imageUrl,
       largeImageUrl: openseaCollection.largeImageUrl,
-      stats: openseaCollection.stats,
       externalLink: openseaCollection.externalLink,
     } as CollectionDetail;
     res.json(result);
@@ -104,6 +103,80 @@ export const getNftByTokenId: RequestHandler = async (req, res, next) => {
       owners: openseaNft.owners,
       rarity: openseaNft.rarity.rank,
     } as NftDetail;
+    res.json(result);
+  } catch (error) {
+    console.log(error.message);
+    return next(new ApplicationError(error.message));
+  }
+};
+
+export const getCollectionStatsByContractAddress: RequestHandler = async (
+  req,
+  res,
+  next
+) => {
+  const { contractAddress } = req.params;
+  await check("contractAddress")
+    .custom(() => {
+      return isAddress(contractAddress);
+    })
+    .withMessage("should be a valid contract address")
+    .run(req);
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(
+      new BadRequest(
+        errors
+          .array()
+          .map((e) => e.msg)
+          .join(", ")
+      )
+    );
+  }
+
+  try {
+    const { openseaCollectionStats, openseaCollection } =
+      await NftService.getCollectionStatsByContractAddress(contractAddress);
+
+    const result = {
+      volume: openseaCollectionStats.total.volume,
+      sales: openseaCollectionStats.total.sales,
+      averagePrice: openseaCollectionStats.total.average_price,
+      numOwners: openseaCollectionStats.total.num_owners,
+      marketCap: openseaCollectionStats.total.market_cap,
+      floorPrice: openseaCollectionStats.total.floor_price,
+      floorPriceSymbol: openseaCollectionStats.total.floor_price_symbol,
+      totalSupply: openseaCollection.stats.count,
+
+      statsByIntervals: [
+        {
+          interval: "oneDay",
+          volume: openseaCollection.stats.one_day_volume,
+          volumeDiff: openseaCollection.stats.one_day_difference,
+          volumeChange: openseaCollection.stats.one_day_change,
+          sales: openseaCollection.stats.one_day_sales,
+          salesDiff: openseaCollection.stats.one_day_sales_change,
+          averagePrice: openseaCollection.stats.one_day_average_price,
+        },
+        {
+          interval: "oneWeek",
+          volume: openseaCollection.stats.seven_day_volume,
+          volumeDiff: openseaCollection.stats.seven_day_difference,
+          volumeChange: openseaCollection.stats.seven_day_change,
+          sales: openseaCollection.stats.seven_day_sales,
+          averagePrice: openseaCollection.stats.seven_day_average_price,
+        },
+        {
+          interval: "oneMonth",
+          volume: openseaCollection.stats.thirty_day_volume,
+          volumeDiff: openseaCollection.stats.thirty_day_difference,
+          volumeChange: openseaCollection.stats.thirty_day_change,
+          sales: openseaCollection.stats.thirty_day_sales,
+          averagePrice: openseaCollection.stats.thirty_day_average_price,
+        },
+      ],
+    } as CollectionStats;
     res.json(result);
   } catch (error) {
     console.log(error.message);

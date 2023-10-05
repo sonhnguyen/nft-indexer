@@ -2,7 +2,7 @@ import { OpenSeaCollectionStats } from "opensea-js/lib/types";
 import { OpenseaOwner } from "../../services/types";
 import { OpenseaTrait } from "../../services/types";
 
-export type CollectionDetail = {
+export interface CollectionDetail {
   name: string;
   slug: string;
   description: string;
@@ -12,13 +12,14 @@ export type CollectionDetail = {
   largeImageUrl: string;
   stats: OpenSeaCollectionStats;
   externalLink: string;
-};
+}
 
-type Trait = {
+interface Trait {
   traitType: string;
   value: string;
-};
-export type NftDetail = {
+}
+
+export interface NftDetail {
   tokenId: string;
   collection: string;
   contract: string;
@@ -31,4 +32,26 @@ export type NftDetail = {
   traits: Trait[];
   owners: OpenseaOwner[];
   rarity: number;
-};
+}
+
+export interface StatsByInterval {
+  interval: string;
+  volume: number;
+  volumeDiff: number;
+  volumeChange: number;
+  sales: number;
+  salesDiff: number;
+  averagePrice: number;
+}
+
+export interface CollectionStats {
+  volume: number;
+  sales: number;
+  averagePrice: number;
+  numOwners: number;
+  marketCap: number;
+  floorPrice: number;
+  floorPriceSymbol: string;
+
+  statsByIntervals: StatsByInterval[];
+}

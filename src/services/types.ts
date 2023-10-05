@@ -31,3 +31,28 @@ export interface OpenSeaNFT extends NFT {
   owners: OpenseaOwner[];
   rarity: OpenseaRarity;
 }
+
+export interface OpenSeaCollectionStats {
+  total: Total;
+  intervals: Interval[];
+}
+
+export interface Interval {
+  interval: string;
+  volume: number;
+  volume_diff: number;
+  volume_change: number;
+  sales: number;
+  sales_diff: number;
+  average_price: number;
+}
+
+export interface Total {
+  volume: number;
+  sales: number;
+  average_price: number;
+  num_owners: number;
+  market_cap: number;
+  floor_price: number;
+  floor_price_symbol: string;
+}
