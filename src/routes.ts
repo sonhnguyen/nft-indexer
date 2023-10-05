@@ -8,7 +8,7 @@ const router = Router();
 router.get("/collection/:contractAddress", NftCollectionController.getCollectionByContractAddress);
 
 router.get("/collection/:contractAddress/stats", NftCollectionController.getCollectionStatsByContractAddress);
-router.get("/collection/:contractAddress/holders", NftCollectionController.getCollectionByContractAddress);
+router.get("/collection/:contractAddress/holders", NftCollectionController.getCollectionHoldersByContractAddress);
 
 router.get("/collection/:contractAddress/nfts/", NftCollectionController.getNftByTokenId);
 

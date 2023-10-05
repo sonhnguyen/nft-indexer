@@ -56,3 +56,9 @@ export interface Total {
   floor_price: number;
   floor_price_symbol: string;
 }
+
+export interface CollectionHolder {
+  address: string;
+  holdingBalance: number;
+  holdingIds: number[];
+}

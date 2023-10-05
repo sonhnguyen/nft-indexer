@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 import ApplicationError from "../../errors/application-error";
 
 import * as NftService from "../../services/nft-service";
+import * as CollectionService from "../../services/collection-service";
 import { check, validationResult } from "express-validator";
 import BadRequest from "../../errors/bad-request";
 import { isAddress } from "ethers/lib/utils";
@@ -33,9 +34,8 @@ export const getCollectionByContractAddress: RequestHandler = async (
   }
 
   try {
-    const openseaCollection = await NftService.getCollectionByContractAddress(
-      contractAddress
-    );
+    const openseaCollection =
+      await CollectionService.getCollectionByContractAddress(contractAddress);
 
     const result = {
       name: openseaCollection.name,
@@ -137,7 +137,9 @@ export const getCollectionStatsByContractAddress: RequestHandler = async (
 
   try {
     const { openseaCollectionStats, openseaCollection } =
-      await NftService.getCollectionStatsByContractAddress(contractAddress);
+      await CollectionService.getCollectionStatsByContractAddress(
+        contractAddress
+      );
 
     const result = {
       volume: openseaCollectionStats.total.volume,
@@ -178,6 +180,44 @@ export const getCollectionStatsByContractAddress: RequestHandler = async (
       ],
     } as CollectionStats;
     res.json(result);
+  } catch (error) {
+    console.log(error.message);
+    return next(new ApplicationError(error.message));
+  }
+};
+
+export const getCollectionHoldersByContractAddress: RequestHandler = async (
+  req,
+  res,
+  next
+) => {
+  const { contractAddress } = req.params;
+  await check("contractAddress")
+    .custom(() => {
+      return isAddress(contractAddress);
+    })
+    .withMessage("should be a valid contract address")
+    .run(req);
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(
+      new BadRequest(
+        errors
+          .array()
+          .map((e) => e.msg)
+          .join(", ")
+      )
+    );
+  }
+
+  try {
+    const collectionHolders =
+      await CollectionService.getCollectionHoldersByContractAddress(
+        contractAddress
+      );
+
+    res.json(collectionHolders);
   } catch (error) {
     console.log(error.message);
     return next(new ApplicationError(error.message));
