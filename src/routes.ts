@@ -9,7 +9,7 @@ const router = Router();
 router.post("/login", (req, res) => {
   const { username } = req.body;
   const token = jwt.sign({ username }, process.env.TOKEN_SECRET, {
-    expiresIn: "100d",
+    expiresIn: "7d",
   });
   res.json({ token });
 });

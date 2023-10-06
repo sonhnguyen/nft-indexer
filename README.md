@@ -10,11 +10,13 @@ The NFT Indexer API server provides functionalities to query and retrieve data r
 
 For convenience, if you using Postman you can import the collection at `nft-indexer.postman_collection.json`.
 
+The backend is temporarily deployed at `157.230.252.99`
+
 ### Authentication
 
 #### Login
 
-`POST /login`
+`POST http://157.230.252.99/login`
 
 - Input:
   - `username` (string): The username for authentication.
@@ -31,7 +33,7 @@ For convenience, if you using Postman you can import the collection at `nft-inde
 
 #### Get Collection Information
 
-`GET /collection/:contractAddress`
+`GET http://157.230.252.99/collection/:contractAddress`
 
 - Input:
   - `contractAddress` (string): The address of the NFT contract.
@@ -54,7 +56,7 @@ For convenience, if you using Postman you can import the collection at `nft-inde
 
 #### Get Collection Statistics
 
-`GET /collection/:contractAddress/stats`
+`GET http://157.230.252.99/collection/:contractAddress/stats`
 
 - Input:
   - `contractAddress` (string): The address of the NFT contract.
@@ -105,7 +107,7 @@ For convenience, if you using Postman you can import the collection at `nft-inde
 
 #### Get Collection Holders
 
-`GET /collection/:contractAddress/holders`
+`GET http://157.230.252.99/collection/:contractAddress/holders`
 
 - Input:
   - `contractAddress` (string): The address of the NFT contract.
@@ -129,7 +131,7 @@ For convenience, if you using Postman you can import the collection at `nft-inde
 
 #### Get NFTs in Collection
 
-`GET /collection/:contractAddress/nfts`
+`GET http://157.230.252.99/collection/:contractAddress/nfts`
 
 - Input:
   - `contractAddress` (string): The address of the NFT contract.
@@ -159,7 +161,7 @@ For convenience, if you using Postman you can import the collection at `nft-inde
   ```
 #### Get NFT by Token ID
 
-`GET /collection/:contractAddress/nfts/:tokenId`
+`GET http://157.230.252.99/collection/:contractAddress/nfts/:tokenId`
 
 - Input:
   - `contractAddress` (string): The address of the NFT contract.
@@ -216,7 +218,7 @@ For convenience, if you using Postman you can import the collection at `nft-inde
 
 #### Get NFT Sales by Token ID
 
-`GET /collection/:contractAddress/nfts/:tokenId/sales`
+`GET http://157.230.252.99/collection/:contractAddress/nfts/:tokenId/sales`
 
 - Input:
   - `contractAddress` (string): The address of the NFT contract.
@@ -264,7 +266,7 @@ For convenience, if you using Postman you can import the collection at `nft-inde
 
 #### Get NFT Ownership History by Token ID
 
-`GET /collection/:contractAddress/nfts/:tokenId/ownerships`
+`GET http://157.230.252.99/collection/:contractAddress/nfts/:tokenId/ownerships`
 
 - Input:
   - `contractAddress` (string): The address of the NFT contract.
